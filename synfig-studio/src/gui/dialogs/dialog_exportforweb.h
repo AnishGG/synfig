@@ -31,6 +31,7 @@
 #include <gtkmm/builder.h>
 
 #include "ETL/handle"
+#include "instance.h"
 
 /* === M A C R O S ========================================================= */
 

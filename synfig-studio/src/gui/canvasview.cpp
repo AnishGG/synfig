@@ -593,7 +593,7 @@ CanvasView::CanvasView(etl::loose_handle<Instance> instance,etl::handle<CanvasIn
 	preview_dialog           ()
 {
 	canvas_options = CanvasOptions::create(*App::main_window, this);
-    dialog_exportforweb = Dialog_ExportForWeb::create(*App::main_window, this);
+    dialog_exportforweb = Dialog_ExportForWeb::create(*App::main_window, this); 
 
 	layer_tree=0;
 	children_tree=0;

@@ -140,8 +140,7 @@ Dialog_ExportForWeb::Dialog_ExportForWeb(BaseObjectType* cobject, const Glib::Re
 	update_title();
 }
 
-Dialog_ExportForWeb* Dialog_ExportForWeb::create(Gtk::Window& parent, CanvasView* canvas_view)
-{
+Dialog_ExportForWeb* Dialog_ExportForWeb::create(Gtk::Window& parent, CanvasView* canvas_view){
 	auto refBuilder = load_interface();
 	if (!refBuilder)
 		return nullptr;
@@ -212,7 +211,7 @@ Dialog_ExportForWeb::on_apply_pressed()
 		canvas_view_->get_work_area()->disable_grid();
 
 	canvas_view_->get_work_area()->set_grid_size(vector_grid_size->get_value());
-    /*run_plugin(this->plugin_path);*/
+    /*Instance::run_plugin(this->plugin_path);*/
 }
 
 void
