@@ -226,6 +226,7 @@ Instance::set_redo_status(bool x)
 void
 studio::Instance::run_plugin(std::string plugin_path)
 {
+    //std::cout << plugin_path << endl;
 	handle<synfigapp::UIInterface> uim = this->find_canvas_view(this->get_canvas())->get_ui_interface();
 
 	String message = strprintf(_("Do you really want to run plugin for file \"%s\"?" ),

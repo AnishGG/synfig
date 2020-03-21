@@ -957,6 +957,7 @@ DEFINE_ACTION("save-all",       Gtk::StockID("synfig-save_all"));
 DEFINE_ACTION("revert",         Gtk::Stock::REVERT_TO_SAVED);
 DEFINE_ACTION("import",         _("Import..."));
 DEFINE_ACTION("import-sequence",_("Import Sequence..."));
+DEFINE_ACTION("export-for-web",  _("Export for web"))
 DEFINE_ACTION("render",         _("Render..."));
 DEFINE_ACTION("preview",        _("Preview..."));
 DEFINE_ACTION("close-document", _("Close Document"));
@@ -1096,6 +1097,7 @@ DEFINE_ACTION("keyframe-properties", _("Properties"));
 "		<separator name='sep-file2'/>"
 "		<menuitem action='import' />"
 "		<menuitem action='import-sequence' />"
+"       <menuitem action='export-for-web' />"
 "		<separator name='sep-file4'/>"
 "		<menuitem action='preview' />"
 "		<menuitem action='render' />"

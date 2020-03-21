@@ -593,6 +593,7 @@ CanvasView::CanvasView(etl::loose_handle<Instance> instance,etl::handle<CanvasIn
 	preview_dialog           ()
 {
 	canvas_options = CanvasOptions::create(*App::main_window, this);
+    dialog_exportforweb = Dialog_ExportForWeb::create(*App::main_window, this);
 
 	layer_tree=0;
 	children_tree=0;
@@ -742,6 +743,7 @@ CanvasView::~CanvasView()
 	canvas_interface()->signal_dirty_preview().clear();
 
 	delete canvas_options;
+    delete dialog_exportforweb;
 
 	if (getenv("SYNFIG_DEBUG_DESTRUCTORS"))
 		info("CanvasView::~CanvasView(): Deleted");
@@ -1465,6 +1467,9 @@ CanvasView::init_menus()
 	action_group->add( Gtk::Action::create("import-sequence", _("Import Sequence...")),
 		sigc::hide_return(sigc::mem_fun(*this, &CanvasView::squence_import))
 	);
+    action_group->add( Gtk::Action::create("export-for-web", _("Export for web")),
+        sigc::mem_fun0(dialog_exportforweb, &Dialog_ExportForWeb::present)
+    );
 	action_group->add( Gtk::Action::create("render", Gtk::StockID("synfig-render_options"), _("Render...")),
 		sigc::mem_fun0(render_settings,&RenderSettings::present)
 	);
@@ -1515,10 +1520,11 @@ CanvasView::init_menus()
 	);
 
 	std::list<PluginManager::plugin> plugin_list = App::plugin_manager.get_list();
-	for(std::list<PluginManager::plugin>::const_iterator p = plugin_list.begin(); p != plugin_list.end(); ++p)
+	for(std::list<PluginManager::plugin>::const_iterator p = plugin_list.begin(); p != plugin_list.end(); ++p){
 		action_group->add(
 			Gtk::Action::create(p->id, p->name),
 			sigc::bind( sigc::mem_fun(*get_instance().get(), &Instance::run_plugin), p->path ) );
+    }
 
 	// Low-Res Quality Menu
 	for(std::list<int>::iterator i = get_pixel_sizes().begin(); i != get_pixel_sizes().end(); ++i) {

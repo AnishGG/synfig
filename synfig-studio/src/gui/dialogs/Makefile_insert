@@ -3,6 +3,7 @@ DIALOGS_HH = \
 	dialogs/canvasoptions.h \
 	dialogs/canvasproperties.h \
 	dialogs/dialog_color.h \
+	dialogs/dialog_exportforweb.h \
 	dialogs/dialog_gradient.h \
 	dialogs/dialog_input.h \
 	dialogs/dialog_keyframe.h \
@@ -22,6 +23,7 @@ DIALOGS_CC = \
 	dialogs/canvasoptions.cpp \
 	dialogs/canvasproperties.cpp \
 	dialogs/dialog_color.cpp \
+	dialogs/dialog_exportforweb.cpp \
 	dialogs/dialog_gradient.cpp \
 	dialogs/dialog_input.cpp \
 	dialogs/dialog_keyframe.cpp \

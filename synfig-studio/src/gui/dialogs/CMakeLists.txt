@@ -4,6 +4,7 @@ target_sources(synfigstudio
         "${CMAKE_CURRENT_LIST_DIR}/canvasoptions.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/canvasproperties.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/dialog_color.cpp"
+        "${CMAKE_CURRENT_LIST_DIR}/dialog_exportforweb.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/dialog_gradient.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/dialog_input.cpp"
         "${CMAKE_CURRENT_LIST_DIR}/dialog_keyframe.cpp"

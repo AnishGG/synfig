@@ -86,6 +86,7 @@
 #include "docks/dockable.h"
 #include "dialogs/canvasoptions.h"
 #include "dialogs/canvasproperties.h"
+#include "dialogs/dialog_exportforweb.h"
 #include "dialogs/dialog_keyframe.h"
 #include "dialogs/dialog_preview.h"
 #include "dialogs/dialog_waypoint.h"
@@ -424,6 +425,7 @@ public:
 
 	CanvasProperties canvas_properties;
 	CanvasOptions *canvas_options;
+    Dialog_ExportForWeb *dialog_exportforweb;
 	RenderSettings render_settings;
 	Dialog_Waypoint waypoint_dialog;
 	Dialog_Keyframe keyframe_dialog;
