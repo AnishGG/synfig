@@ -211,7 +211,7 @@ Dialog_ExportForWeb::on_apply_pressed()
 		canvas_view_->get_work_area()->disable_grid();
 
 	canvas_view_->get_work_area()->set_grid_size(vector_grid_size->get_value());
-    /*Instance::run_plugin(this->plugin_path);*/
+    Instance::run_plugin(this->plugin_path);
 }
 
 void
