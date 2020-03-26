@@ -87,7 +87,6 @@ static Glib::RefPtr<Gtk::Builder> load_interface() {
 void Dialog_ExportForWeb::set_canvas_view(CanvasView* canvas_view)
 {
 	this->canvas_view_ = canvas_view;
-	vector_grid_size->set_canvas(canvas_view->get_canvas());
 	update_title();
 }
 
@@ -96,21 +95,15 @@ Dialog_ExportForWeb::Dialog_ExportForWeb(BaseObjectType* cobject, const Glib::Re
 	builder(refGlade)//,
 //	canvas_view_(canvas_view),
 {
-	refGlade->get_widget("toggle_grid_show", toggle_grid_show);
-	refGlade->get_widget("toggle_grid_snap", toggle_grid_snap);
-	refGlade->get_widget("toggle_time_snap", toggle_time_snap);
-	refGlade->get_widget("vector_grid_size", vector_grid_size);
-	//vector_grid_size.set_canvas(canvas_view->get_canvas());
+	refGlade->get_widget("outline_without_variable_width", outline_without_variable_width);
 
   /* Find the plugin id from here and also the path*/
     std::list<PluginManager::plugin> plugin_list = App::plugin_manager.get_list();
     for(std::list<PluginManager::plugin>::const_iterator p = plugin_list.begin(); p != plugin_list.end(); ++p){
         if(p->path.find("lottie-exporter") != std::string::npos){
             plugin_path = p->path;
-            std::cout << "GUL:: " << plugin_path << std::endl;
         }
     }
-    /***/
 
 	Gtk::Button *button = nullptr;
 
@@ -120,22 +113,16 @@ Dialog_ExportForWeb::Dialog_ExportForWeb(BaseObjectType* cobject, const Glib::Re
 
 	refGlade->get_widget("apply_button", button);
 	if (button)
-//		button->signal_clicked().connect(sigc::mem_fun(*this->canvas_view_, &Instance::run_plugin), plugin_path );
 		button->signal_clicked().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::on_apply_pressed));
 
 	refGlade->get_widget("cancel_button", button);
 	if (button)
 		button->signal_clicked().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::on_cancel_pressed));
 
-	if (toggle_grid_snap)
-		toggle_grid_snap->signal_toggled().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::on_grid_snap_toggle));
-	if (toggle_grid_show)
-		toggle_grid_show->signal_toggled().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::on_grid_show_toggle));
+    if (outline_without_variable_width)
+        outline_without_variable_width->signal_toggled().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::on_outline_without_variable_width_toggle));
 
 	signal_show().connect(sigc::mem_fun(*this, &studio::Dialog_ExportForWeb::refresh));
-
-	vector_grid_size->set_digits(5);
-
 
 	update_title();
 }
@@ -167,51 +154,23 @@ Dialog_ExportForWeb::update_title()
 void
 Dialog_ExportForWeb::refresh()
 {
-	if(canvas_view_->get_work_area()->grid_status())
-		toggle_grid_show->set_active(true);
-	else
-		toggle_grid_show->set_active(false);
-
-	if(canvas_view_->get_work_area()->get_grid_snap())
-		toggle_grid_snap->set_active(true);
-	else
-		toggle_grid_snap->set_active(false);
-
-	vector_grid_size->set_value(canvas_view_->get_work_area()->get_grid_size());
-
-	toggle_time_snap->set_tooltip_text(_("Not yet implemented"));
-	toggle_time_snap->set_sensitive(false);
-
+    /* outline_without_variable_width->set_active(true); */
 	update_title();
 }
 
-void
-Dialog_ExportForWeb::on_grid_snap_toggle()
-{
-}
 
 void
-Dialog_ExportForWeb::on_grid_show_toggle()
+Dialog_ExportForWeb::on_outline_without_variable_width_toggle()
 {
 }
 
 void
 Dialog_ExportForWeb::on_apply_pressed()
 {
-	canvas_view_->set_grid_snap_toggle(toggle_grid_snap->get_active());
-	if(toggle_grid_snap->get_active())
-		canvas_view_->get_work_area()->enable_grid_snap();
-	else
-		canvas_view_->get_work_area()->disable_grid_snap();
 
-	canvas_view_->set_grid_show_toggle(toggle_grid_show->get_active());
-	if(toggle_grid_show->get_active())
-		canvas_view_->get_work_area()->enable_grid();
-	else
-		canvas_view_->get_work_area()->disable_grid();
+	/*canvas_view_->set_grid_show_toggle(outline_without_variable_width->get_active());*/
 
-	canvas_view_->get_work_area()->set_grid_size(vector_grid_size->get_value());
-    Instance::run_plugin(this->plugin_path);
+    canvas_view_->get_instance()->run_plugin(this->plugin_path);
 }
 
 void

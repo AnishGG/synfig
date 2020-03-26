@@ -53,12 +53,8 @@ class Dialog_ExportForWeb:  public Gtk::Dialog
 {
 	etl::loose_handle<CanvasView> canvas_view_;
 
-	Gtk::CheckButton * toggle_grid_snap;
-	Gtk::CheckButton * toggle_grid_show;
+	Gtk::CheckButton * outline_without_variable_width;
 
-	Widget_Vector * vector_grid_size;
-
-	Gtk::CheckButton * toggle_time_snap;
     std::string plugin_path;
 
 	const Glib::RefPtr<Gtk::Builder>& builder;
@@ -72,8 +68,7 @@ public:
 	void update_title();
 private:
 
-	void on_grid_snap_toggle();
-	void on_grid_show_toggle();
+    void on_outline_without_variable_width_toggle();
 
 	void on_ok_pressed();
 	void on_apply_pressed();
